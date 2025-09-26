@@ -10,12 +10,12 @@ const app = express();
 
 const port = 3000;
 
-// handlebars
+// handlebars middleware
 app.engine("handlebars", engine());
 app.set("view handlebars", "handlebars");
 app.set("views", "./views");
 
-// test
+// test routes
 const testRoutes = require("./routers/testRoutes");
 app.use("/", testRoutes);
 

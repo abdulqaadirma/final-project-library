@@ -1,0 +1,17 @@
+const express = require("express");
+const adminRouter = express.Router();
+const adminController = require("../controllers/adminController");
+const authenticateMiddleware = require("../controllers/authenticateMiddleware");
+
+adminRouter.get("/adminDashboard", authenticateMiddleware.isAdminMiddleware, adminController.adminDashboard);
+adminRouter.get("/adminUserManagement", authenticateMiddleware.isAdminMiddleware, adminController.adminUserManagement);
+
+adminRouter.get("/adminCreate", authenticateMiddleware.isAdminMiddleware, adminController.adminCreate);
+adminRouter.post("/adminStore", authenticateMiddleware.isAdminMiddleware, adminController.adminStore);
+
+adminRouter.get("/adminEdit/:username", authenticateMiddleware.isAdminMiddleware, adminController.adminEdit);
+adminRouter.post("/adminUpdate", authenticateMiddleware.isAdminMiddleware, adminController.adminUpdate);
+
+adminRouter.get("/adminDelete/:username", authenticateMiddleware.isAdminMiddleware, adminController.adminDelete);
+
+module.exports = adminRouter;

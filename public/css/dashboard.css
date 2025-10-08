@@ -1,0 +1,57 @@
+.dashboard {
+    margin: 10px 25px;
+}
+.dashboard .sub-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.dashboard .sub-title a {
+    background-color: #3498Db;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 9px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table th {
+    padding: 10px 0px;
+    background-color: rgb(162, 142, 92);
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+table td, table th {
+    padding: 8px;
+    border: 2px solid #dbd3d3;
+    text-align: left;
+}
+table td {
+    font-weight: bold;
+    font-size: medium;
+}
+table tr:nth-child(even) {
+    background-color: #c9c9c9;
+}
+table tr:hover {
+    background-color: rgb(111, 79, 79);
+    color: white;
+}
+/* icons */
+table tr td a i {
+    padding: 9px 25px;
+    border-radius: 10px;
+}
+table tr td a .edit-icon {
+    background-color: #F39C12;
+    color: white;
+}
+table tr td a .delete-icon {
+    background-color: rgb(245, 5, 5);
+    color: white;
+}

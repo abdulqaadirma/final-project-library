@@ -3,9 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
     <title>Libary</title>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            {{#unless session.isLoggedIn }}
+                <a href="/">
+                    <img src="/img/header/logo.png" alt="">
+                    <span>JU LIBRARY</span>
+                </a>
+            {{else}}
+                {{#if session.isAdmin}}
+                    <a href="/adminDashboard">
+                        <img src="/img/header/logo.png" alt="">
+                        <span>JU LIBRARY</span>
+                    </a>
+                {{else}}
+                    <a href="/memberDashboard">
+                        <img src="img/header/logo.png" alt="">
+                        <span>JU LIBRARY</span>
+                    </a>
+                {{/if}}
+            {{/unless}}
+        </div>
+
+        <div class="user">
+            {{#if session.isLoggedIn}}
+                <p>
+                Hej, {{session.username}}
+                <a href="/logout"> Logout</a>
+                </p>
+            {{else}}
+                <a href="/login">Login</a>
+            {{/if}}
+        </div>
+    </header>
+    {{#if session.isAdmin}}
+        <nav>
+            <ul>
+                <li><a href="">Dashboard</a></li>
+                <li><a href="">Books Catalog</a></li>
+                <li><a href="">Borrowing</a></li>
+                <li><a href="/adminUserManagement">User Management</a></li>
+            </ul>
+         </nav>
+    {{else}}
+        {{#if session.isMember}}
+            <nav>
+                <ul>
+                    <li><a href="">Dashboard</a></li>
+                    <li><a href="">My Books</a></li>
+                    <li><a href="">Reservations</a></li>
+                    <li><a href="">Borrowing History</a></li>
+                </ul>
+            </nav>
+         {{/if}}
+    {{/if}}
+
     {{{body}}}
 </body>
 </html>

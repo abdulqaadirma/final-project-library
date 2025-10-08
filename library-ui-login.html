@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === CSS VARIABLES === */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* === AUTH CONTAINER STYLES === */
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            transition: var(--transition);
+        }
+
+        .auth-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .auth-header h1 span {
+            color: var(--secondary);
+        }
+
+        .auth-header p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .auth-body {
+            padding: 30px;
+        }
+
+        /* === FORM STYLES === */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .input-with-icon .form-control {
+            padding-left: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* === BUTTON STYLES === */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-google {
+            background: white;
+            color: #333;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-google:hover {
+            border-color: var(--gray);
+            background: #f8f9fa;
+        }
+
+        /* === LINK STYLES === */
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .auth-link a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .auth-link a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* === DIVIDER STYLES === */
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+        }
+
+        /* === ALERT STYLES === */
+        .alert {
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* === PROGRESS BAR STYLES === */
+        .password-strength {
+            margin-top: 8px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: #e74c3c; width: 33%; }
+        .strength-medium { background: #f39c12; width: 66%; }
+        .strength-strong { background: #27ae60; width: 100%; }
+
+        .strength-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* === TERMS STYLES === */
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terms-group input[type="checkbox"] {
+            margin-top: 2px;
+        }
+
+        .terms-group label {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+
+        .terms-group a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .terms-group a:hover {
+            text-decoration: underline;
+        }
+
+        /* === RESPONSIVE STYLES === */
+        @media (max-width: 480px) {
+            .auth-container {
+                max-width: 100%;
+            }
+            
+            .auth-body {
+                padding: 20px;
+            }
+            
+            .auth-header {
+                padding: 20px;
+            }
+            
+            .auth-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* === UTILITY CLASSES === */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === LOADING SPINNER === */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-loading span {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="auth-container" id="loginContainer">
+        <div class="auth-header">
+            <h1>Library<span>Pro</span></h1>
+            <p>Welcome back! Please sign in to your account</p>
+        </div>
+        
+        <div class="auth-body">
+            <!-- Alert Messages -->
+            <div class="alert alert-error" id="loginError">
+                <i class="fas fa-exclamation-circle"></i> Invalid username or password
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" class="form-control" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="terms-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me for 30 days</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <div class="spinner"></div>
+                    <span>Sign In</span>
+                </button>
+
+                <div class="divider">
+                    <span>Or continue with</span>
+                </div>
+
+                <button type="button" class="btn btn-google">
+                    <i class="fab fa-google"></i>
+                    Sign in with Google
+                </button>
+
+                <div class="auth-link">
+                    Don't have an account? <a href="#" onclick="showRegister()">Sign up here</a>
+                </div>
+
+                <div class="auth-link">
+                    <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                </div>
+
+                <!-- Demo Credentials -->
+                <div class="demo-credentials mt-20">
+                    <details>
+                        <summary style="cursor: pointer; color: var(--secondary); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Demo Credentials
+                        </summary>
+                        <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: var(--radius); font-size: 0.8rem;">
+                            <div><strong>Admin:</strong> admin / wdiff2025</div>
+                            <div><strong>Librarian:</strong> librarian1 / password123</div>
+                            <div><strong>Member:</strong> member1 / password123</div>
+                        </div>
+                    </details>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="auth-container hidden" id="registerContainer">
+        <div class="auth-header">
+            <h1>Join <span>LibraryPro</span></h1>
+            <p>Create your account to start borrowing books</p>
+        </div>
+        
+        <div class="auth-body">
+            <!-- Alert Messages -->
+            <div class="alert alert-success" id="registerSuccess">
+                <i class="fas fa-check-circle"></i> Registration successful! Redirecting...
+            </div>
+
+            <div class="alert alert-error" id="registerError">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorMessage"></span>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="registerEmail" class="form-control" placeholder="john.doe@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerUsername">Username</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerUsername" class="form-control" placeholder="Choose a username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" class="form-control" placeholder="Create a password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="passwordStrength"></div>
+                        </div>
+                        <div class="strength-text" id="passwordText">Password strength</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userRole">Account Type</label>
+                    <select id="userRole" class="form-control" required>
+                        <option value="">Select account type</option>
+                        <option value="member">Library Member</option>
+                        <option value="librarian">Librarian</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="terms-group">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <label for="acceptTerms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="registerBtn">
+                    <div class="spinner"></div>
+                    <span>Create Account</span>
+                </button>
+
+                <div class="auth-link">
+                    Already have an account? <a href="#" onclick="showLogin()">Sign in here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <div class="auth-container hidden" id="forgotPasswordContainer">
+        <div class="auth-header">
+            <h1>Reset Password</h1>
+            <p>Enter your email to receive reset instructions</p>
+        </div>
+        
+        <div class="auth-body">
+            <div class="alert alert-success" id="forgotSuccess">
+                <i class="fas fa-check-circle"></i> Reset instructions sent to your email
+            </div>
+
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgotEmail">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="forgotEmail" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Send Reset Instructions
+                </button>
+
+                <div class="auth-link">
+                    <a href="#" onclick="showLogin()">Back to login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and register forms
+        function showRegister() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('registerContainer').classList.remove('hidden');
+            document.getElementById('registerContainer').classList.add('fade-in');
+            hideAllAlerts();
+        }
+
+        function showLogin() {
+            document.getElementById('registerContainer').classList.add('hidden');
+            document.getElementById('forgotPasswordContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+            document.getElementById('loginContainer').classList.add('fade-in');
+            hideAllAlerts();
+        }
+
+        function showForgotPassword() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('forgotPasswordContainer').classList.remove('hidden');
+            document.getElementById('forgotPasswordContainer').classList.add('fade-in');
+            hideAllAlerts();
+        }
+
+        // Password visibility toggle
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.parentNode.querySelector('.password-toggle i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        // Password strength checker
+        document.getElementById('registerPassword').addEventListener('input', function(e) {
+            const password = e.target.value;
+            const strengthBar = document.getElementById('passwordStrength');
+            const strengthText = document.getElementById('passwordText');
+            
+            let strength = 0;
+            let text = 'Password strength';
+            
+            if (password.length >= 8) strength += 1;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
+            if (password.match(/\d/)) strength += 1;
+            if (password.match(/[^a-zA-Z\d]/)) strength += 1;
+            
+            strengthBar.className = 'strength-fill';
+            
+            switch(strength) {
+                case 0:
+                    text = 'Very weak';
+                    break;
+                case 1:
+                    strengthBar.classList.add('strength-weak');
+                    text = 'Weak';
+                    break;
+                case 2:
+                    strengthBar.classList.add('strength-medium');
+                    text = 'Medium';
+                    break;
+                case 3:
+                    strengthBar.classList.add('strength-medium');
+                    text = 'Good';
+                    break;
+                case 4:
+                    strengthBar.classList.add('strength-strong');
+                    text = 'Strong';
+                    break;
+            }
+            
+            strengthText.textContent = text;
+        });
+
+        // Form validation and submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Show loading state
+            loginBtn.classList.add('btn-loading');
+            
+            // Simulate API call
+            setTimeout(() => {
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Demo authentication logic
+                if ((username === 'admin' && password === 'wdiff2025') ||
+                    (username === 'librarian1' && password === 'password123') ||
+                    (username === 'member1' && password === 'password123')) {
+                    // Successful login - redirect to main application
+                    window.location.href = 'main-app.html'; // Change to your main app URL
+                } else {
+                    // Show error
+                    document.getElementById('loginError').style.display = 'block';
+                    loginBtn.classList.remove('btn-loading');
+                }
+            }, 1500);
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const registerBtn = document.getElementById('registerBtn');
+            
+            // Validate passwords match
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showRegisterError('Passwords do not match');
+                return;
+            }
+            
+            // Show loading state
+            registerBtn.classList.add('btn-loading');
+            
+            // Simulate API registration
+            setTimeout(() => {
+                // In a real app, this would send data to your backend
+                document.getElementById('registerSuccess').style.display = 'block';
+                
+                // Redirect to login after successful registration
+                setTimeout(() => {
+                    showLogin();
+                    registerBtn.classList.remove('btn-loading');
+                }, 2000);
+            }, 2000);
+        });
+
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate password reset request
+            setTimeout(() => {
+                document.getElementById('forgotSuccess').style.display = 'block';
+                
+                // Redirect to login after delay
+                setTimeout(() => {
+                    showLogin();
+                }, 3000);
+            }, 1000);
+        });
+
+        // Helper functions
+        function hideAllAlerts() {
+            document.querySelectorAll('.alert').forEach(alert => {
+                alert.style.display = 'none';
+            });
+        }
+
+        function showRegisterError(message) {
+            const errorElement = document.getElementById('registerError');
+            document.getElementById('errorMessage').textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            hideAllAlerts();
+            
+            // Check if user is already logged in (in a real app, check localStorage/session)
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn) {
+                window.location.href = 'main-app.html';
+            }
+        });
+
+        // Demo auto-fill for testing
+        function demoLogin(role) {
+            let username, password;
+            
+            switch(role) {
+                case 'admin':
+                    username = 'admin';
+                    password = 'wdiff2025';
+                    break;
+                case 'librarian':
+                    username = 'librarian1';
+                    password = 'password123';
+                    break;
+                case 'member':
+                    username = 'member1';
+                    password = 'password123';
+                    break;
+            }
+            
+            document.getElementById('loginUsername').value = username;
+            document.getElementById('loginPassword').value = password;
+        }
+    </script>
+</body>
+</html>

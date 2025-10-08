@@ -1,0 +1,26 @@
+<div class="dashboard">
+    <div class="sub-title">
+        <h1>All users</h1>
+        <a href="/create"><i class="fa fa-user-plus"></i>Add New User</a>
+    </div>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#each users}}
+            <tr>
+                <td>{{username}}</td>
+                <td>{{first_name}} {{last_name}}</td>
+                <td>{{email}}</td>
+                <td>{{role}}</td>
+                <td><a href="/adminEdit/{{this.username}}"><i class="fa fa-edit edit-icon"></i></a></td>
+                <td><a href="/adminDelete/{{this.username}}"><i class="fa fa-trash delete-icon"></i></a></td>
+            </tr>
+        {{/each}}
+    </table>
+</div>

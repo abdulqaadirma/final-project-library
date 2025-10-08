@@ -1,0 +1,54 @@
+<div class="create">
+    <h1>Sing up</h1>
+    <form 
+        {{#if session.isAdmin}}
+            action="/adminStore"
+        {{else}}
+             action="/store"
+        {{/if}}
+                
+        method="post"
+    
+    >
+        <label for="firstName">First Name</label>
+        <br>
+        <input type="text" name="firstName" placeholder="Join">
+        <br>
+        <label for="lastName">Last Name</label>
+        <br>
+        <input type="text" name="lastName" placeholder="doe">
+        <br>
+        <label for="emai">Email Address</label>
+        <br>
+        <input type="text" name="email" placeholder="join.doe@example.com">
+        <br>
+        <label for="username">Username</label>
+        <br>
+        <input type="text" name="username" placeholder="Choose a username">
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input type="password" name="password" placeholder="Create a password">
+        <br>
+
+        <!-- if admin (role: member, librarian, admin) -->
+        {{#if session.isAdmin}}
+            <label for="role">Role</label>
+            <br>
+            <select name="role" class="role">
+                <option value="member">Memeber</option>
+                <option value="librarian">Labrarian</option>
+                <option value="admin">Admin</option>
+            </select>
+            <br>
+        {{/if}}
+
+        <input type="submit" value="Create">
+    </form>
+    <p>Already have an account? <a href="/login">Sign in here</a></p>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
+</div>

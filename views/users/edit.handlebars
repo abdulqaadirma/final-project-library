@@ -2,11 +2,14 @@
     <h1>Update</h1>
     <form 
         {{#if session.isAdmin}}
-            action="/adminUpdate"
+            action="/adminUpdate/{{user.id}}"
+        {{else}}
+            {{#if session.isLibrarian}}
+                action="/librarianUpdate/{{user.id}}"
+            {{/if}}
         {{/if}}
                 
         method="post"
-    
     >
         <label for="firstName">First Name</label>
         <br>

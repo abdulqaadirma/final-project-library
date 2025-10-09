@@ -1,20 +1,20 @@
 const usersModel = require("../models/users");
 
-function adminDashboard(req, res){
-    res.render("dashboard/adminDashboard.handlebars");
+function librarianDashboard(req, res){
+    res.render("dashboard/librarianDashboard.handlebars");
 }
 
-async function adminUserManagement(req, res){
-    const users = await usersModel.adminGetUsers();
+async function librarianUserManagement(req, res){
+    const users = await usersModel.librarianGetUsers();
     model = {users};
-    res.render("dashboard/adminUserManagement.handlebars", model);
+    res.render("dashboard/librarianUserManagement.handlebars", model);
 }
 
-function adminCreate(req, res){
+function librarianCreate(req, res){
     res.render("users/create.handlebars")
 }
 
-async function adminStore(req, res) {
+async function librarianStore(req, res) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
@@ -41,29 +41,29 @@ async function adminStore(req, res) {
             return res.render("users/create.handlebars", model)
         }
 
-        const result = await usersModel.addUser(username, password, email, firstName, lastName, role);
+        const result = await usersModel.addUser(username, password, email, firstName, lastName, "member");
         //console.log(result);
-        res.redirect("/adminUserManagement")
+        res.redirect("/librarianUserManagement")
     }catch(error){
         res.render("users/create.handlebars");
     }
 }
 
-async function adminEdit(req, res){
+async function librarianEdit(req, res){
     const id = req.params.id;
     const user = await usersModel.getUserById(id);
+    //console.log(user.username);
     const model = {user}
     res.render("users/edit.handlebars", model);
 }
 
-async function adminUpdate(req, res) {
+async function librarianUpdate(req, res) {
     const id = req.params.id;
     const username = req.body.username;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
     const password = req.body.password;
-    const role = req.body.role;
 
     if(username.length<=0 || password.length<=0 || email.length<=0 || firstName.length<=0 || lastName.length<=0){
         const user = await usersModel.getUserByUsernameOrEmail(username);
@@ -72,21 +72,20 @@ async function adminUpdate(req, res) {
     }
 
     try{
-        const updatedUser = await usersModel.updateUser(id, password, firstName, lastName, role);  
-        
-        res.redirect("/adminUserManagement");
+        const updatedUser = await usersModel.updateUser(id, password, firstName, lastName, "member");   
+
+        res.redirect("/librarianUserManagement");
     }catch(error){
         console.log(error);
         res.render("users/edit.handlebars");
     }
-
 }
 
-async function adminDelete(req, res) {
+async function librarianDelete(req, res) {
     const id = req.params.id;
     const deletedUser = await usersModel.deleteUser(id);
-    res.redirect("/adminUserManagement");
+    res.redirect("/librarianUserManagement");
 }
 
 
-module.exports = {adminDashboard, adminUserManagement, adminCreate, adminStore, adminEdit, adminUpdate, adminDelete};
+module.exports = {librarianDashboard, librarianUserManagement, librarianCreate, librarianStore, librarianEdit, librarianUpdate, librarianDelete};

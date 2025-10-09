@@ -4,7 +4,11 @@
         {{#if session.isAdmin}}
             action="/adminStore"
         {{else}}
-             action="/store"
+            {{#if session.isLibrarian}}
+                action="/librarianStore"
+            {{else}}
+                action="/store"
+            {{/if}}
         {{/if}}
                 
         method="post"

@@ -9,13 +9,9 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const connectSqlite3 = require("connect-sqlite3");
 
-const {initTableUsers, getUsers, addUser} = require("./models/users");
+const {initTableUsers} = require("./models/users");
+const {initAllAboutBooks} = require("./models/books");
 
-/*
-const sqlite3 = require("sqlite3");
-const dbFile = "library.sqlite3";
-db = new sqlite3.Database(dbFile);
-*/
 const app = express();
 
 const port = 3000;
@@ -60,6 +56,10 @@ app.use("/", userRoutes);
 const adminRoutes = require("./routers/adminRoutes");
 app.use("/", adminRoutes);
 
+// librarian routes
+const librarianRoutes = require("./routers/librarianRoutes");
+app.use("/", librarianRoutes);
+
 // member routes
 const memberRoutes = require("./routers/memberRoutes");
 app.use("/", memberRoutes);
@@ -68,24 +68,8 @@ app.use("/", memberRoutes);
 const bookRoutes = require("./routers/bookRoutes");
 app.use("/", bookRoutes);
 
-async function printUsers(){
-    try{
-        const users = await getUsers();
-        console.log(users.length);
-        users.forEach((user)=>{
-            console.log(user.username, "  : role: ", user.role);
-        });
-    }catch(error){
-        console.log("ERROR: ", error);
-    } 
-};
-
 app.listen(port, ()=>{
-    //initTableUsers(db);  // create users table
-    //printUsers();
-    //addUser("fareeja", "00000", "fareeja@example.com", "daadir", "fareeja", "admin");
-    //addUser("admin", "wdf#2025", "admin@admin.com", "admin", "admin", "admin");
-
-
+    //initTableUsers();  // create users table 
+    initAllAboutBooks();
     console.log(`Server is running on http://localhost:${port}`);
 })

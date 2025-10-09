@@ -1,11 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const userController = require("../controllers/userController");
-const authenticateMiddleware = require("../controllers/authenticateMiddleware");
-const sqlite3 = require("sqlite3");
-const dbFile = "../library.sqlite3";
-
-db = new sqlite3.Database(dbFile);
+//const authenticateMiddleware = require("../controllers/authenticateMiddleware");
 
 userRouter.get("/", userController.login);
 userRouter.get("/login", userController.login);

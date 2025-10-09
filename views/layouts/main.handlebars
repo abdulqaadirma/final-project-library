@@ -55,15 +55,26 @@
             </ul>
          </nav>
     {{else}}
-        {{#if session.isMember}}
+        {{#if session.isLibrarian}}
             <nav>
                 <ul>
                     <li><a href="">Dashboard</a></li>
-                    <li><a href="">My Books</a></li>
-                    <li><a href="">Reservations</a></li>
-                    <li><a href="">Borrowing History</a></li>
+                    <li><a href="">Books Catalog</a></li>
+                    <li><a href="">Borrowing</a></li>
+                    <li><a href="/librarianUserManagement">User Management</a></li>
                 </ul>
             </nav>
+        {{else}}
+            {{#if session.isMember}}
+                <nav>
+                    <ul>
+                        <li><a href="">Dashboard</a></li>
+                        <li><a href="">My Books</a></li>
+                        <li><a href="">Reservations</a></li>
+                        <li><a href="">Borrowing History</a></li>
+                    </ul>
+                </nav>
+            {{/if}}
          {{/if}}
     {{/if}}
 

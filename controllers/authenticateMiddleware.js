@@ -9,6 +9,16 @@ function isAdminMiddleware(req, res, next){
     }
 }
 
+function isLibrarianMiddleware(req, res, next){
+    if(req.session.isLoggedIn && req.session.isLibrarian){
+        return next();
+    }else{
+        req.session.destroy(()=>{
+            res.redirect("/login");
+        });
+    }
+}
+
 function isMemberMiddleware(req, res, next){
     if(req.session.isLoggedIn && req.session.isMember){
         return next();
@@ -19,4 +29,4 @@ function isMemberMiddleware(req, res, next){
     }
 }
 
-module.exports = {isAdminMiddleware, isMemberMiddleware};
+module.exports = {isAdminMiddleware, isMemberMiddleware, isLibrarianMiddleware};

@@ -9,9 +9,9 @@ adminRouter.get("/adminUserManagement", authenticateMiddleware.isAdminMiddleware
 adminRouter.get("/adminCreate", authenticateMiddleware.isAdminMiddleware, adminController.adminCreate);
 adminRouter.post("/adminStore", authenticateMiddleware.isAdminMiddleware, adminController.adminStore);
 
-adminRouter.get("/adminEdit/:username", authenticateMiddleware.isAdminMiddleware, adminController.adminEdit);
-adminRouter.post("/adminUpdate", authenticateMiddleware.isAdminMiddleware, adminController.adminUpdate);
+adminRouter.get("/adminEdit/:id", authenticateMiddleware.isAdminMiddleware, adminController.adminEdit);
+adminRouter.post("/adminUpdate/:id", authenticateMiddleware.isAdminMiddleware, adminController.adminUpdate);
 
-adminRouter.get("/adminDelete/:username", authenticateMiddleware.isAdminMiddleware, adminController.adminDelete);
+adminRouter.get("/adminDelete/:id", authenticateMiddleware.isAdminMiddleware, adminController.adminDelete);
 
 module.exports = adminRouter;

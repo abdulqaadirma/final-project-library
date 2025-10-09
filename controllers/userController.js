@@ -31,6 +31,9 @@ async function loginAuthoicate(req, res){
         }else if(user.role === "admin"){
             req.session.isAdmin = true;
             res.redirect("/adminDashboard");
+        }else if(user.role === "librarian"){
+            req.session.isLibrarian = true;
+            res.redirect("/librarianDashboard");
         }
     }catch(error){
         console.error("Login error:", error);

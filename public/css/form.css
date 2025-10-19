@@ -1,35 +1,282 @@
-.login, .create, .edit {
+.login, .create, .edit, .createBook, .editBook {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f2f2f2;
     margin: 100px 250px;
     padding: 100px 250px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.createBook div, .editBook div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.createBook div a, .editBook div a {
+    margin-left: 5px;
+    background-color: rgb(52, 152, 219);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.createBook div a:hover, .editBook div a:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
 form {
     width: 75%;
 }
+
 form label {
     font-weight: bold;
+    color: #2c3e50;
+    display: block;
+    font-size: 0.95rem;
 }
-form input[type=text], form input[type=password], .role {
+
+form input[type=text], 
+form input[type=password], 
+form input[type=number], 
+form input[type=file], 
+.select,
+form textarea {
     width: 100%;
-    padding: 10px 5px 10px 5px;
+    padding: 12px 15px;
     font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 2px;
+    margin-bottom: 15px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
+
+form input[type=text]:focus, 
+form input[type=password]:focus, 
+form input[type=number]:focus, 
+form input[type=file]:focus, 
+.select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-1px);
+}
+
+form textarea {
+    width: 100%;
+    height: 120px;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 300px;
+    font-family: inherit;
+}
+
 form input[type=submit] {
-    padding: 10px 20px;
+    padding: 12px 30px;
     border-radius: 9px;
     background-color: #3498Db;
     color: white;
     border: none;
-    font-size: large;
+    font-size: 1rem;
     font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+form input[type=submit]:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+form input[type=submit]:active {
+    transform: translateY(0);
 }
 
 .errorMessenge {
-    color: red;
+    color: #e74c3c;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: block;
+    background: #fdEDEC;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 4px solid #e74c3c;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+form input[type=file] {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 2px dashed #bdc3c7;
+}
+
+form input[type=file]:hover {
+    border-color: #3498db;
+    background-color: #ecf0f1;
+}
+
+form input[type=checkbox],
+form input[type=radio] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+form .checkbox-group,
+form .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+form .checkbox-group label,
+form .radio-group label {
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .login, .create, .edit, .createBook {
+        margin: 80px 150px;
+        padding: 80px 150px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .login, .create, .edit, .createBook {
+        margin: 60px 100px;
+        padding: 60px 100px;
+    }
+    
+    form {
+        width: 85%;
+    }
+}
+
+@media (max-width: 768px) {
+    .login, .create, .edit, .createBook {
+        margin: 40px 50px;
+        padding: 40px 50px;
+    }
+    
+    form {
+        width: 90%;
+    }
+    
+    .createBook div {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .createBook div a {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .login, .create, .edit, .createBook {
+        margin: 20px 15px;
+        padding: 30px 20px;
+    }
+    
+    form {
+        width: 100%;
+    }
+    
+    form input[type=text], 
+    form input[type=password], 
+    form input[type=number], 
+    form input[type=file], 
+    .select,
+    form textarea {
+        padding: 10px 12px;
+        font-size: 16px; 
+    }
+    
+    form input[type=submit] {
+        padding: 14px 30px; 
+        font-size: 1.1rem;
+    }
+    
+    .createBook div {
+        gap: 10px;
+    }
+    
+    .createBook div a {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    form input[type=submit] {
+        border: 1px solid transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login, .create, .edit, .createBook,
+    form input[type=text],
+    form input[type=password],
+    form input[type=number],
+    form input[type=file],
+    .select,
+    form textarea,
+    form input[type=submit],
+    .createBook div a {
+        transition: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .login, .create, .edit, .createBook {
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        background: white;
+    }
+    
+    form input[type=submit],
+    .createBook div a {
+        display: none;
+    }
 }

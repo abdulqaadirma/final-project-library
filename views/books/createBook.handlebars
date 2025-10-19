@@ -1,0 +1,65 @@
+<div class="createBook">
+    <h1>Add New Book</h1>
+    <form action="/storeBook" method="post" enctype="multipart/form-data">
+        <label for="bookTitle">Book Title</label><br>
+        <input type="text" name="bookTitle" placeholder="Enter book title" required><br>
+        <label for="ISBN">ISBN</label><br>
+        <input type="text" name="ISBN" placeholder="9780451524935" required><br>
+        <label for="genre">Genre</label><br>
+        <div>
+            <select name="genreId" class="select" required>
+                <option >Select genre</option>
+                {{#each genres}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <a href="/createGenre"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="publisher">Publisher</label><br>
+        <div>
+            <select name="publisherId" class="select" required>
+                <option >Select publisher</option>
+                {{#each publishers}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <a href="/createPublisher"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="totalCopies">Total Copies</label><br>
+        <input type="number" name="totalCopies" min="1" value="1" required><br>
+        <label for="availableCopies">Available copies</label><br>
+        <input type="number" name="availableCopies" min="1" value="1" required><br>
+        <label for="publishYear">Publication year</label><br>
+        <input type="number" name="publishYear" placeholder="2025" required><br>
+        <label for="edition">Edition</label><br>
+        <input type="text" name="edition" placeholder="e.g., First Edition" required><br>
+        <label for="language">Language</label>
+        <input type="text" name="language" value="English" required><br>
+        <label for="pageCount">Page count</label><br>
+        <input type="number" name="pageCount" placeholder="Number of pages" required><br>
+        <label for="author">Author</label><br>
+        <div>
+            <select name="authorId" class="select" required>
+                <option >Select Author</option>
+                {{#each authors}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <a href="/createAuthor"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="description">Description</label><br>
+        <textarea name="description" placeholder="Enter book description..." required></textarea><br>
+        <label for="coverImage">Book Cover Image</label><br>
+        <input type="file" name="coverImage" accept="image/*" required><br>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
+</div>

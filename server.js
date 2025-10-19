@@ -1,27 +1,40 @@
 /*
     Abdulqaadir Mohumed Ahmed - ahab24dy@student.ju.se
+
+    Target grade: 5
+
+    Web Dev Fun - 2025
+
     admin username: admin
     admin password: wdf#2025
+
+    
+
 */
 const express = require("express");
 const {engine} = require("express-handlebars");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const connectSqlite3 = require("connect-sqlite3");
+const fileUpload = require("express-fileupload");
+const path = require("path");
 
-const {initTableUsers} = require("./models/users");
-const {initAllAboutBooks} = require("./models/books");
+const {initAllTables} = require("./models/initAllDatabaseTalbles");
 
 const app = express();
 
 const port = 3000;
 
-//static middleware
-app.use(express.static("public"));
-
 //form post method
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(fileUpload({
+    createParentPath: true, // Create parent directories if they don't exist
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+}));
+
+//static middleware
+app.use(express.static("public"));
 
 // session midleware
 const SQLiteStore = connectSqlite3(session) // store sessions in the database
@@ -68,8 +81,18 @@ app.use("/", memberRoutes);
 const bookRoutes = require("./routers/bookRoutes");
 app.use("/", bookRoutes);
 
-app.listen(port, ()=>{
-    //initTableUsers();  // create users table 
-    initAllAboutBooks();
-    console.log(`Server is running on http://localhost:${port}`);
+// error and dafault route
+app.use((req, res)=>{
+    res.status(404).render("error/404.handlebars");
 })
+
+// 500 error
+app.use((err, req, res, next)=>{
+    console.error(err.stack);
+    res.status(500).render("error/500.handlebars");
+})
+
+app.listen(port, ()=>{
+    //initAllTables();
+    console.log(`Server is running on http://localhost:${port}`);
+});

@@ -1,0 +1,71 @@
+<div class="bookDetail">
+    <!--
+        a.bio, a.nationality,  a.birth_date,  a.death_date,  a.author_image, g.name AS genre_name,  g.description AS genre_description,
+        p.id AS publisher_id, p.name AS publisher_name
+-->
+    <div class="part1">
+        <div class="image">
+            <img src="{{book.book_cover_image}}" alt="{{book.book_cover_image}}">
+        </div>
+        <div class="limitCopies">
+            <h2>Limit Copies</h2>
+            <div>
+                <div>
+                    <h2>{{book.available_copies}}</h2>
+                    <p>Available</p>
+                </div>
+                <div>
+                    <p>{{book.total_copies}}</p>
+                    <p>Total Copies</p>
+                </div>  
+            </div>
+        </div>
+        <div class="borrow">
+            <a href=""><i class="fa fa-shopping-cart icon"></i>Borrow Book</a>
+        </div>
+        <div class="quickInfo">
+            <h2>Quick Info</h2>
+            <p><span>ISBN: </span> <span>{{book.isbn}}</span></p>
+            <p><span>Language: </span> <span>{{book.language}}</span></p>
+            <p><span>Pages: </span> <span>{{book.page_count}}</span></p>
+        </div>
+    </div>
+    <div class="part2">
+       <div>
+            <h1>{{book.title}}</h1>
+            <h5>by {{book.author_name}}</h5>
+       </div>
+        <div>
+            <p>GENRE</p>
+            <h3>{{book.genre_name}}</h3>
+        </div>
+        <div>
+            <p>PUBLISHER</p>
+            <h3>{{book.publisher_name}}</h3>
+        </div>
+        <div>
+            <p>EDITION</p>
+            <h3>{{book.edition}}</h3>
+        </div>
+        <div>
+            <p>PUBLISHED</p>
+            <h3>{{book.publication_year}}</h3>
+        </div>
+        <div class="description">
+            <p>DESCRIPTION</p>
+            <h3>{{book.book_description}}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="admLib">
+    {{#if session.isAdmin}}
+        <a href="/editBook/{{book.book_id}}" class="edit-link"><i class="fa fa-edit"></i>Update Book</a>
+        <a href="/deleteBook/{{book.book_id}}" class="delete-link"><i class="fa fa-trash"></i>Delete Book</a>
+    {{else}}
+        {{#if session.isLibrarian}}
+            <a href="/editBook/{{book.book_id}}" class="edit-link"><i class="fa fa-edit"></i>Update Book</a>
+            <a href="/deleteBook/{{book.book_id}}" class="delete-link"><i class="fa fa-trash"></i>Delete Book</a>
+        {{/if}}
+    {{/if}} 
+</div>

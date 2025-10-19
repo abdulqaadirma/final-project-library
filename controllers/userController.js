@@ -27,7 +27,7 @@ async function loginAuthoicate(req, res){
         req.session.username = req.body.username;
         if(user.role === "member"){
             req.session.isMember = true;
-            res.redirect("/memberDashboard");
+            res.redirect("/books");
         }else if(user.role === "admin"){
             req.session.isAdmin = true;
             res.redirect("/adminDashboard");

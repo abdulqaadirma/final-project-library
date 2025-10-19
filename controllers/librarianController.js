@@ -53,7 +53,7 @@ async function librarianEdit(req, res){
     const id = req.params.id;
     const user = await usersModel.getUserById(id);
     //console.log(user.username);
-    const model = {user}
+    const model = {user};
     res.render("users/edit.handlebars", model);
 }
 

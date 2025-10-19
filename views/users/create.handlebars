@@ -1,5 +1,5 @@
 <div class="create">
-    <h1>Sing up</h1>
+    <h1>Create account</h1>
     <form 
         {{#if session.isAdmin}}
             action="/adminStore"
@@ -16,30 +16,29 @@
     >
         <label for="firstName">First Name</label>
         <br>
-        <input type="text" name="firstName" placeholder="Join">
+        <input type="text" name="firstName" placeholder="Join" required="required">
         <br>
         <label for="lastName">Last Name</label>
         <br>
-        <input type="text" name="lastName" placeholder="doe">
+        <input type="text" name="lastName" placeholder="doe" required="required">
         <br>
         <label for="emai">Email Address</label>
         <br>
-        <input type="text" name="email" placeholder="join.doe@example.com">
+        <input type="text" name="email" placeholder="join.doe@example.com" required="required">
         <br>
         <label for="username">Username</label>
         <br>
-        <input type="text" name="username" placeholder="Choose a username">
+        <input type="text" name="username" placeholder="Choose a username" required="required">
         <br>
         <label for="password">Password</label>
         <br>
-        <input type="password" name="password" placeholder="Create a password">
+        <input type="password" name="password" placeholder="Create a password" required="required">
         <br>
 
         <!-- if admin (role: member, librarian, admin) -->
         {{#if session.isAdmin}}
-            <label for="role">Role</label>
-            <br>
-            <select name="role" class="role">
+            <label for="role">Role</label><br>
+            <select name="role" class="select">
                 <option value="member">Memeber</option>
                 <option value="librarian">Labrarian</option>
                 <option value="admin">Admin</option>

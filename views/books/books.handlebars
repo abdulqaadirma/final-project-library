@@ -1,4 +1,74 @@
-<div>
-    <h1>books</h1>
-    {{username}} ------ {{password_hash}}
+<div class="booksPage">
+    <div class="sub-title">
+        <h1>Books Catalog</h1>
+        <a href="/createBook"><i class="fa fa-user-plus"></i>Add New Book</a>
+    </div>
+    
+    {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+    
+    <div class="books">
+        {{#each books}}
+            <div class="book">
+                <img src="{{book_cover_image}}" alt="{{title}}">
+                <h3>{{title}}</h3>
+                <h5>{{author_name}}</h5>
+                <div class="">
+                    <p><i class="fa fa-copy icon"></i> {{available_copies}}/{{total_copies}} available</p>
+                    <p><i class="fa fa-tag icon"></i>{{genre_name}}</p>
+                </div>
+                <div>
+                    <a href="" class="borrow"><i class="fa fa-shopping-cart icon"></i>Borrow</a>
+                    <a href="/bookDetail/{{book_id}}" class="view"><i class="fa fa-eye icon"></i>View</a>
+                </div>
+            </div>
+        {{else}}
+            <div class="no-books">
+                <p>No books found in the catalog.</p>
+            </div>
+        {{/each}}
+    </div>
+    
+    <!-- Pagination Controls -->
+    {{#if pagination.totalPages}}
+    <div class="pagination-container">
+        <div class="pagination-info">
+            <p>Showing {{pagination.showingFrom}} to {{pagination.showingTo}} of {{pagination.totalBooks}} books</p>
+        </div>
+        
+        <div class="pagination">
+            <!-- Previous Button -->
+            {{#if pagination.hasPrevPage}}
+                <a href="/books?page={{pagination.prevPage}}&limit={{pagination.limit}}" class="pagination-btn">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            {{else}}
+                <span class="pagination-btn disabled">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </span>
+            {{/if}}
+            
+            <!-- Page Numbers -->
+            {{#each pagination.pages}}
+                {{#if (eq this ../pagination.currentPage)}}
+                    <span class="pagination-btn active">{{this}}</span>
+                {{else}}
+                    <a href="/books?page={{this}}&limit={{../pagination.limit}}" class="pagination-btn">{{this}}</a>
+                {{/if}}
+            {{/each}}
+            
+            <!-- Next Button -->
+            {{#if pagination.hasNextPage}}
+                <a href="/books?page={{pagination.nextPage}}&limit={{pagination.limit}}" class="pagination-btn">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            {{else}}
+                <span class="pagination-btn disabled">
+                    Next <i class="fa fa-chevron-right"></i>
+                </span>
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
 </div>

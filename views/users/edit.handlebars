@@ -13,30 +13,30 @@
     >
         <label for="firstName">First Name</label>
         <br>
-        <input type="text" name="firstName" placeholder="Join" value="{{user.first_name}}">
+        <input type="text" name="firstName" placeholder="Join" value="{{user.first_name}}" required="required">
         <br>
         <label for="lastName">Last Name</label>
         <br>
-        <input type="text" name="lastName" placeholder="doe" value="{{user.last_name}}">
+        <input type="text" name="lastName" placeholder="doe" value="{{user.last_name}}" required="required">
         <br>
         <label for="email">Email Address</label>
         <br>
-        <input type="text" name="email" placeholder="join.doe@example.com" value="{{user.email}}" readonly>
+        <input type="text" name="email" placeholder="join.doe@example.com" value="{{user.email}}" required="required" readonly>
         <br>
         <label for="username">Username</label>
         <br>
-        <input type="text" name="username" placeholder="Choose a username" value="{{user.username}}" readonly>
+        <input type="text" name="username" placeholder="Choose a username" value="{{user.username}}" required="required" readonly>
         <br>
         <label for="password">Password</label>
         <br>
-        <input type="password" name="password" placeholder="Create a password" value="{{user.password}}">
+        <input type="password" name="password" placeholder="Create a password" value="{{user.password}}" required="required">
         <br>
 
         <!-- if admin (role: member, librarian, admin) -->
         {{#if session.isAdmin}}
             <label for="role">Role</label>
             <br>
-            <select name="role" class="role">
+            <select name="role" class="select">
                 {{#if (eq user.role "member")}}
                     <option value="member">memeber</option>
                     <option value="librarian">librarian</option>

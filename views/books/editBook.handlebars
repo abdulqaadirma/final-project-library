@@ -1,0 +1,84 @@
+<div class="editBook">
+    <h1>Update Book</h1>
+    <form action="/updateBook/{{book.book_id}}" method="post" enctype="multipart/form-data">
+        <label for="bookTitle">Book Title</label><br>
+        <input type="text" name="bookTitle" placeholder="Enter book title" value="{{book.title}}"><br>
+        <label for="ISBN">ISBN</label><br>
+        <input type="text" name="ISBN" placeholder="9780451524935" value="{{book.isbn}}"><br>
+        <label for="genre">Genre</label><br>
+        <div>
+            <select name="genreId" class="select" >
+                {{#each genres}}
+                    {{#if (eq this.name ../book.genre_name)}}
+                        <option value="{{this.id}}" selected>{{this.name}}</option>
+                    {{else}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+            <a href="/createGenre"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="publisher">Publisher</label><br>
+        <div>
+            <select name="publisherId" class="select" >
+                {{#each publishers}}
+                    {{#if (eq this.name ../book.publisher_name)}}
+                        <option value="{{this.id}}" selected>{{this.name}}</option>
+                    {{else}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+            <a href="/createPublisher"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="totalCopies">Total Copies</label><br>
+        <input type="number" name="totalCopies" min="1" value="{{book.total_copies}}"><br>
+        <label for="availableCopies">Available copies</label><br>
+        <input type="number" name="availableCopies" min="1" value="{{book.available_copies}}"><br>
+        <label for="publishYear">Publication year</label><br>
+        <input type="number" name="publishYear" placeholder="2025" value="{{book.publication_year}}"><br>
+        <label for="edition">Edition</label><br>
+        <input type="text" name="edition" placeholder="e.g., First Edition" value="{{book.edition}}"><br>
+        <label for="language">Language</label>
+        <input type="text" name="language" value="{{book.language}}"><br>
+        <label for="pageCount">Page count</label><br>
+        <input type="number" name="pageCount" placeholder="Number of pages" value="{{book.page_count}}"><br>
+        <label for="author">Author</label><br>
+        <div>
+            <select name="authorId" class="select" >
+                {{#each authors}}
+                    {{#if (eq this.name ../book.author_name)}}
+                        <option value="{{this.id}}" selected>{{this.name}}</option>
+                    {{else}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+            <a href="/createAuthor"><i class="fa fa-plus icon"></i></a>
+        </div>
+        <br>
+        <label for="description">Description</label><br>
+        <textarea name="description">{{book.book_description}}</textarea><br>
+        <label for="coverImage">Book Cover Image</label><br>
+        <img src="{{book.book_cover_image}}" name alt="{{book.book_cover_image}}"><br>
+        <input type="hiden" name="currentImagePath" value="{{book.book_cover_image}}">
+        <label for="udateImage">Update Image</label><br>
+        <input type="file" name="coverImage" accept="image/*"><br>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
+</div>
+
+<!--
+b.id AS book_id, b.title,  b.isbn,  b.description AS book_description, b.publication_year, 
+            b.edition, b.book_cover_image,  b.language, b.total_copies,  b.available_copies, b.page_count, a.id AS author_id, a.name AS author_name, 
+            a.bio, a.nationality,  a.birth_date,  a.death_date,  a.author_image, g.name AS genre_name,  g.description AS genre_description,
+            p.id AS publisher_id, p.name AS publisher_name
+-->

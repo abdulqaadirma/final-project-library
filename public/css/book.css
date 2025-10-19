@@ -1,0 +1,422 @@
+.booksPage {
+    margin: 10px 25px;
+}
+
+.booksPage .sub-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.booksPage .sub-title h1 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.booksPage .sub-title a {
+    background-color: #3498db;
+    text-decoration: none;
+    padding: 12px 25px;
+    color: white;
+    border-radius: 9px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.booksPage .sub-title a:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* 3 Books Per Row Grid */
+.booksPage .books {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.booksPage .books .book {
+    border: 2px solid #bdc3c7;
+    border-radius: 12px;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.booksPage .books .book:hover {
+    border-color: #3498db;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.booksPage .books .book img {
+    width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+}
+
+.booksPage .books .book h3 {
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    min-height: 3em;
+}
+
+.booksPage .books .book h5 {
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+.booksPage .books .book > div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+
+.booksPage .books .book > div:first-of-type p {
+    margin: 0;
+    color: #34495e;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.booksPage .books .book > div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.booksPage .books .book > div:last-of-type a {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 9px;
+    margin-top: 0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.booksPage .books .book .borrow {
+    background-color: #3498db;
+}
+
+.booksPage .books .book .borrow:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.booksPage .books .book div .view {
+    background-color: #27ae60;
+}
+
+.booksPage .books .book div .view:hover {
+    background-color: #219a52;
+    transform: translateY(-2px);
+}
+
+.booksPage .books .book div .icon {
+    padding-right: 5px;
+    font-size: 0.9rem;
+}
+
+/* Pagination Styles */
+.pagination-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pagination-info {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+    font-size: 0.95rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    padding: 10px 16px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #3498db;
+    background: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 44px;
+    text-align: center;
+}
+
+.pagination-btn:hover:not(.disabled):not(.active) {
+    background: #ecf0f1;
+    border-color: #3498db;
+    transform: translateY(-2px);
+}
+
+.pagination-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.pagination-btn.disabled {
+    color: #95a5a6;
+    background: #f8f9fa;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+/* No Books State */
+.no-books {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #7f8c8d;
+    font-style: italic;
+    background: #ecf0f1;
+    border-radius: 12px;
+    border: 2px dashed #bdc3c7;
+}
+
+/* Error State */
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 4px solid;
+}
+
+.alert-danger {
+    background: #fdEDEC;
+    color: #c0392b;
+    border-left-color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .booksPage .books {
+        gap: 25px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .booksPage .books {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin: 0;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .booksPage {
+        margin: 10px 15px;
+    }
+    
+    .booksPage .sub-title {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .booksPage .books {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px 0;
+    }
+    
+    .booksPage .books .book {
+        padding: 15px;
+    }
+    
+    .booksPage .books .book > div:last-of-type {
+        flex-direction: column;
+    }
+    
+    .booksPage .books .book > div:last-of-type a {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .booksPage {
+        margin: 10px;
+    }
+    
+    .booksPage .sub-title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .booksPage .sub-title a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .booksPage .books .book img {
+        height: 160px;
+    }
+    
+    .pagination {
+        gap: 5px;
+    }
+    
+    .pagination-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        min-width: 40px;
+    }
+}
+
+/* bookDetail  */
+.bookDetail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 100px 100px 25px 100px;
+    padding-top: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+.bookDetail .part1 {
+    width: 30%;
+}
+.bookDetail .part1 .image {
+    margin-right: 25px;
+}
+.bookDetail .part1 .borrow a {
+    padding: 10px 20px;
+    color: white;
+    margin-top: 5px 0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.bookDetail .part1 .borrow {
+    border-radius: 10px;
+    background-color: #3498db;
+}
+.bookDetail .part1 .borrow:hover {
+    background-color: #133f5d;
+    transform: translateY(-2px);
+}
+.bookDetail .part1 .borrow .icon {
+    padding-right: 5px;
+    font-size: 0.9rem;
+}
+.bookDetail .part2 {
+    width: 65%;
+}
+.bookDetail .part2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 10px 10px;
+}
+.bookDetail .part2 .description {
+    grid-column: 1 / -1;
+}
+.bookDetail .part1 > div {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.bookDetail .part1 .limitCopies,
+.bookDetail .part1 .quickInfo {
+    margin: 10px 25px 10px 0px;
+    padding: 10px;
+}
+.bookDetail .part1 .borrow {
+    margin: 10px 25px 10px 0px;
+    padding: 5px;
+}
+.bookDetail .part1 .limitCopies > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.bookDetail .part1 .quickInfo p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 0 5px;
+}
+
+.admLib {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 9px;
+    padding: 20px;
+    margin: 25px 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.admLib a {
+    text-decoration: none;
+    padding: 9px 25px;
+    border-radius: 9px;
+    color: white;
+    margin: 0 25px;
+}
+.admLib a:hover {
+    background-color: #79623e;
+}
+.admLib a i {
+    padding-right: 10px;
+}
+.admLib .edit-link {
+    background-color: #F39C12;
+}
+.admLib .delete-link {
+    background-color: rgb(245, 5, 5);
+    color: white;
+}

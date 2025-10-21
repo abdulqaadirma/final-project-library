@@ -3,7 +3,7 @@ const adminRouter = express.Router();
 const adminController = require("../controllers/adminController");
 const authenticateMiddleware = require("../controllers/authenticateMiddleware");
 
-adminRouter.get("/adminDashboard", authenticateMiddleware.isAdminMiddleware, adminController.adminDashboard);
+adminRouter.get("/dashboard", authenticateMiddleware.isAdminOrLibrarianMiddleware, adminController.dashboard);
 adminRouter.get("/adminUserManagement", authenticateMiddleware.isAdminMiddleware, adminController.adminUserManagement);
 
 adminRouter.get("/adminCreate", authenticateMiddleware.isAdminMiddleware, adminController.adminCreate);

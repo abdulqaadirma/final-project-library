@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/book.css">
+    <link rel="stylesheet" href="/css/error.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Libary</title>
 </head>
 <body>
@@ -22,15 +24,22 @@
                 </a>
             {{else}}
                 {{#if session.isAdmin}}
-                    <a href="/adminDashboard">
+                    <a href="/dashboard">
                         <img src="/img/header/logo.png" alt="">
                         <span>JU LIBRARY</span>
                     </a>
                 {{else}}
-                    <a href="/memberDashboard">
-                        <img src="/img/header/logo.png" alt="">
-                        <span>JU LIBRARY</span>
-                    </a>
+                    {{#if session.isLibrarian}}
+                        <a href="/dashboard">
+                            <img src="/img/header/logo.png" alt="">
+                            <span>JU LIBRARY</span>
+                        </a>
+                    {{else}}
+                        <a href="/books">
+                            <img src="/img/header/logo.png" alt="">
+                            <span>JU LIBRARY</span>
+                        </a>
+                    {{/if}}
                 {{/if}}
             {{/unless}}
         </div>
@@ -46,12 +55,12 @@
             {{/if}}
         </div>
     </header>
+
     {{#if session.isAdmin}}
         <nav>
             <ul>
-                <li><a href="">Dashboard</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/books">Books Catalog</a></li>
-                <li><a href="">Borrowing</a></li>
                 <li><a href="/adminUserManagement">User Management</a></li>
             </ul>
          </nav>
@@ -59,9 +68,8 @@
         {{#if session.isLibrarian}}
             <nav>
                 <ul>
-                    <li><a href="">Dashboard</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/books">Books Catalog</a></li>
-                    <li><a href="">Borrowing</a></li>
                     <li><a href="/librarianUserManagement">User Management</a></li>
                 </ul>
             </nav>
@@ -70,9 +78,6 @@
                 <nav>
                     <ul>
                         <li><a href="/books">Dashboard</a></li>
-                        <li><a href="">My Books</a></li>
-                        <li><a href="">Reservations</a></li>
-                        <li><a href="">Borrowing History</a></li>
                     </ul>
                 </nav>
             {{/if}}
@@ -80,5 +85,17 @@
     {{/if}}
 
     {{{body}}}
+
+    <footer class="footer-compact">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>&copy; 2025 LibraryPro System v1.0</p>
+            </div>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

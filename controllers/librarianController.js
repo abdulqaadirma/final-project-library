@@ -1,7 +1,14 @@
 const usersModel = require("../models/users");
+const bookModel = require("../models/books");
 
-function librarianDashboard(req, res){
-    res.render("dashboard/librarianDashboard.handlebars");
+async function dashboard(req, res){
+    const totalUsers = await bookModel.totalUsers();
+    const totalBooks = await bookModel.totalBooks();
+    const totalAuthors = await bookModel.totalAuthors();
+    const totalGenres = await bookModel.totalGenres();
+    const totalPublishers = await bookModel.totalPublishers();
+    const model = {totalUsers, totalBooks, totalAuthors, totalGenres, totalPublishers};
+    res.render("dashboard/dashboard.handlebars", model);
 }
 
 async function librarianUserManagement(req, res){
@@ -88,4 +95,4 @@ async function librarianDelete(req, res) {
 }
 
 
-module.exports = {librarianDashboard, librarianUserManagement, librarianCreate, librarianStore, librarianEdit, librarianUpdate, librarianDelete};
+module.exports = {dashboard, librarianUserManagement, librarianCreate, librarianStore, librarianEdit, librarianUpdate, librarianDelete};

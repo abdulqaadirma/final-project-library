@@ -197,20 +197,70 @@ async function deleteBook(req, res) {
 
 
 // genre
+async function genre(req, res){
+    const genres = await bookModel.getGenres();
+    const model = {genres};
+    res.render("books/genres.handlebars", model);
+}
 function createGenre(req, res){
     res.render("books/createGenre.handlebars");
 }
-
+async function storeGenre(req, res) {
+    const name = req.body.name;
+    const description = req.body.description;
+    
+    if(name.length<=0 || description.length<=0 ){
+        const model = {error: "Please fill all input"};
+        return res.render("books/createGenre.handlebars", model);
+    }
+    const result = await bookModel.addGenre(name, description);
+    res.redirect("/genres");
+}
 async function editGenre(req, res){
     const id = req.params.id;
     const genre = await bookModel.getGenreById(id);
     const model = {genre}
     res.render("books/editGenre.handlebars", model)
 }
+async function updateGenre(req, res) {
+    const id = req.params.id;
+    const name = req.body.name;
+    const description = req.body.description;
+    
+    if(name.length<=0 || description.length<=0 ){
+        const model = {error: "Please fill all input"};
+        return res.render("books/createGenre.handlebars", model);
+    }
+    const result = await bookModel.updateGenre(id, name, description);
+    res.redirect("/genres");
+}
+async function deleteGenre(req, res) {
+    const id = req.params.id;
+    const result = bookModel.deleteGenre(id);
+    res.redirect("/genres");
+}
 
 // author
+async function author(req, res){
+    const authors = await bookModel.getAuthors();
+    const model = {authors};
+    res.render("books/authors.handlebars", model);
+}
 function createAuthor(req, res){
     res.render("books/createAuthor.handlebars");
+}
+async function storeAuthor(req, res) {
+    const name = req.body.name;
+    const bio = req.body.bio;
+    const nationality = req.body.nationality;
+    const birthDate = req.body.birthDate;
+    
+    if(name.length<=0 || bio.length<=0 || nationality.length<=0 || birthDate.length<=0){
+        const model = {error: "Please fill all input"};
+        return res.render("books/createAuthor.handlebars", model);
+    }
+    const result = await bookModel.addAuthor(name, bio, nationality, birthDate);
+    res.redirect("/authors");
 }
 async function editAuthor(req, res) {
     const id = req.params.id;
@@ -218,10 +268,47 @@ async function editAuthor(req, res) {
     const model = {author}
     res.render("books/editAuthor.handlebars", model);
 }
+async function updateAuthor(req, res) {
+    const id = req.params.id;
+    const name = req.body.name;
+    const bio = req.body.bio;
+    const nationality = req.body.nationality;
+    const birthDate = req.body.birthDate;
+    
+    if(name.length<=0 || bio.length<=0 || nationality.length<=0 || birthDate.length<=0){
+        const model = {error: "Please fill all input"};
+        return res.render("books/editAuthor.handlebars", model);
+    }
+    const result = await bookModel.updateAuthor(id, name, bio, nationality, birthDate);
+    res.redirect("/authors");
+}
+async function deleteAuthor(req, res) {
+    const id = req.params.id;
+    const result = bookModel.deleteAuthor(id);
+    res.redirect("/authors");
+}
 
 // publisher
+async function publisher(req, res){
+    const publishers = await bookModel.getPublishers();
+    const model = {publishers};
+    res.render("books/publishers.handlebars", model);
+}
 function createPublisher(req, res){
     res.render("books/createPublisher.handlebars");
+}
+async function storePublisher(req, res) {
+    const name = req.body.name;
+    const address = req.body.address;
+    const contactEmail = req.body.contactEmail;
+    const establishedYear = req.body.establishedYear;
+    
+    if(name.length<=0 || address.length<=0 || contactEmail.length<=0 || establishedYear.length<=0){
+        const model = {error: "Please fill all input"};
+        return res.render("books/createPublisher.handlebars", model);
+    }
+    const result = await bookModel.addPublisher(name, address, contactEmail, establishedYear);
+    res.redirect("/publishers");
 }
 async function editPublisher(req, res) {
     const id = req.params.id;
@@ -229,6 +316,28 @@ async function editPublisher(req, res) {
     const model = {publisher}
     res.render("books/editPublisher.handlebars", model);
 }
+async function updatePublisher(req, res) {
+    const id = req.params.id;
+    const name = req.body.name;
+    const address = req.body.address;
+    const contactEmail = req.body.contactEmail;
+    const website = req.body.website;
+    const establishedYear = req.body.establishedYear;
+    
+    if(name.length<=0 || address.length<=0 || contactEmail.length<=0 || establishedYear.length<=0){
+        const model = {error: "Please fill all input"};
+        return res.render("books/editPublisher.handlebars", model);
+    }
+    const result = await bookModel.updatePublisher(id, name, address, contactEmail, website, establishedYear);
+    res.redirect("/publishers");
+}
+async function deletePublisher(req, res) {
+    const id = req.params.id;
+    const result = bookModel.deletePublisher(id);
+    res.redirect("/publishers");
+}
 
-module.exports = {books, bookDetail, createBooK, storeBook, editBook, updateBook, deleteBook, editGenre, editAuthor, editPublisher,
-                    createGenre, createAuthor, createPublisher};
+module.exports = {books, bookDetail, createBooK, storeBook, editBook, updateBook, deleteBook, 
+                    genre, createGenre, storeGenre, editGenre, updateGenre, deleteGenre,
+                    author, createAuthor, storeAuthor, editAuthor, updateAuthor, deleteAuthor,
+                    publisher, createPublisher, storePublisher, editPublisher, updatePublisher, deletePublisher};

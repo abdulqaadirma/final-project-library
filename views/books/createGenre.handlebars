@@ -1,3 +1,16 @@
-<div>
-    <h1>create genre</h1>
+<div class="createBook">
+    <h1>Add New Genre</h1>
+    <form action="/storeGenre" method="post">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Enter name" required><br>
+        <label for="description">Description</label><br>
+        <input type="text" name="description" placeholder="Enter description" required><br>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
 </div>

@@ -1,7 +1,14 @@
 const usersModel = require("../models/users");
+const bookModel = require("../models/books");
 
-function adminDashboard(req, res){
-    res.render("dashboard/adminDashboard.handlebars");
+async function dashboard(req, res){
+    const totalUsers = await bookModel.totalUsers();
+    const totalBooks = await bookModel.totalBooks();
+    const totalAuthors = await bookModel.totalAuthors();
+    const totalGenres = await bookModel.totalGenres();
+    const totalPublishers = await bookModel.totalPublishers();
+    const model = {totalUsers, totalBooks, totalAuthors, totalGenres, totalPublishers};
+    res.render("dashboard/dashboard.handlebars", model);
 }
 
 async function adminUserManagement(req, res){
@@ -89,4 +96,4 @@ async function adminDelete(req, res) {
 }
 
 
-module.exports = {adminDashboard, adminUserManagement, adminCreate, adminStore, adminEdit, adminUpdate, adminDelete};
+module.exports = {dashboard, adminUserManagement, adminCreate, adminStore, adminEdit, adminUpdate, adminDelete};

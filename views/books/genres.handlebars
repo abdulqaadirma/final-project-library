@@ -1,0 +1,22 @@
+<div class="dashboard">
+    <div class="sub-title">
+        <h1>All genres</h1>
+        <a href="/createGenre"><i class="fa fa-user-plus"></i>Add New Genre</a>
+    </div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>DESCRIPTION</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#each genres}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td><a href="/editGenre/{{this.id}}"><i class="fa fa-edit edit-icon"></i></a></td>
+                <td><a href="/deleteGenre/{{this.id}}"><i class="fa fa-trash delete-icon"></i></a></td>
+            </tr>
+        {{/each}}
+    </table>
+</div>

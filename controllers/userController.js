@@ -30,10 +30,10 @@ async function loginAuthoicate(req, res){
             res.redirect("/books");
         }else if(user.role === "admin"){
             req.session.isAdmin = true;
-            res.redirect("/adminDashboard");
+            res.redirect("/dashboard");
         }else if(user.role === "librarian"){
             req.session.isLibrarian = true;
-            res.redirect("/librarianDashboard");
+            res.redirect("/dashboard");
         }
     }catch(error){
         console.error("Login error:", error);
@@ -91,5 +91,12 @@ function logout(req, res){
     })
 }
 
+function about(req, res){
+    res.render("users/about.handlebars");
+}
+function contact(req, res){
+    res.render("users/contact.handlebars");
+}
 
-module.exports = {login, loginAuthoicate, create, store, logout};
+
+module.exports = {login, loginAuthoicate, create, store, logout, about, contact};

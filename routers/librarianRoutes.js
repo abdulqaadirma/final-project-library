@@ -3,7 +3,7 @@ const librarianRouter = express.Router();
 const librarianController = require("../controllers/librarianController");
 const authenticateMiddleware = require("../controllers/authenticateMiddleware");
 
-librarianRouter.get("/librarianDashboard", authenticateMiddleware.isLibrarianMiddleware, librarianController.librarianDashboard);
+librarianRouter.get("/dashboard", authenticateMiddleware.isAdminOrLibrarianMiddleware, librarianController.dashboard);
 librarianRouter.get("/librarianUserManagement", authenticateMiddleware.isLibrarianMiddleware, librarianController.librarianUserManagement);
 
 librarianRouter.get("/librarianCreate", authenticateMiddleware.isLibrarianMiddleware, librarianController.librarianCreate);

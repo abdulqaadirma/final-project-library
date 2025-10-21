@@ -1,8 +1,17 @@
 <div class="booksPage">
-    <div class="sub-title">
-        <h1>Books Catalog</h1>
-        <a href="/createBook"><i class="fa fa-user-plus"></i>Add New Book</a>
-    </div>
+    {{#if session.isAdmin}}
+        <div class="sub-title">
+            <h1>Books Catalog</h1>
+            <a href="/createBook"><i class="fa fa-user-plus"></i>Add New Book</a>
+        </div>
+    {{else}}
+        {{#if session.isLibrarian}}
+            <div class="sub-title">
+                <h1>Books Catalog</h1>
+                <a href="/createBook"><i class="fa fa-user-plus"></i>Add New Book</a>
+            </div>
+        {{/if}}
+    {{/if}}
     
     {{#if error}}
         <div class="alert alert-danger">{{error}}</div>

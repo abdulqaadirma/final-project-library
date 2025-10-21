@@ -13,21 +13,27 @@ bookRouter.post("/updateBook/:id", authenticateMiddleware.isAdminOrLibrarianMidd
 bookRouter.get("/deleteBook/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.deleteBook);
 
 // genre
+bookRouter.get("/genres", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.genre);
 bookRouter.get("/createGenre", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.createGenre);
-//bookRouter.get("/storeGenre", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storeGenre);
-bookRouter.get("/editGenre", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editGenre);
-//bookRouter.post("/updateGenre", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updateGenre);
+bookRouter.post("/storeGenre", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storeGenre);
+bookRouter.get("/editGenre/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editGenre);
+bookRouter.post("/updateGenre/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updateGenre);
+bookRouter.get("/deleteGenre/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.deleteGenre);
 
 // author
+bookRouter.get("/authors", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.author);
 bookRouter.get("/createAuthor", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.createAuthor);
-//bookRouter.get("/storeAuthor", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storeAuthor);
-bookRouter.get("/editAuthor", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editAuthor);
-//bookRouter.post("/updateAuthor", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updateAuthor);
+bookRouter.post("/storeAuthor", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storeAuthor);
+bookRouter.get("/editAuthor/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editAuthor);
+bookRouter.post("/updateAuthor/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updateAuthor);
+bookRouter.get("/deleteAuthor/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.deleteAuthor);
 
 // publisher
+bookRouter.get("/publishers", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.publisher);
 bookRouter.get("/createPublisher", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.createPublisher);
-//bookRouter.get("/storePublisher", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storePublisher);
-bookRouter.get("/editPublisher", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editPublisher);
-//bookRouter.post("/updatePublisher", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updatePublisher);
+bookRouter.post("/storePublisher", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.storePublisher);
+bookRouter.get("/editPublisher/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.editPublisher);
+bookRouter.post("/updatePublisher/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.updatePublisher);
+bookRouter.get("/deletePublisher/:id", authenticateMiddleware.isAdminOrLibrarianMiddleware, booksController.deletePublisher);
 
 module.exports = bookRouter;

@@ -143,7 +143,7 @@ async function deleteBook(id){
     const authorId = book.author_id;
     const resultDeleteBook = await deleteBook_author(bookId, authorId);
     //console.log(resultDeleteBook);
-    
+
     return new Promise((resolve, reject)=>{
         const query = "DELETE FROM books WHERE id = ?";
         db.run(query, [id], (error)=>{
@@ -182,11 +182,11 @@ function getAuthorById(id){
         })
     })
 }
-function addAuthor(name, bio, nationality, birth_date, death_date, author_image){
+function addAuthor(name, bio, nationality, birth_date, death_date=null){
     return new Promise((resolve, reject)=>{
-        const query = "INSERT INTO authors(name, bio, nationality, birth_date, death_date, author_image) \
-                        values(?, ?, ?, ?, ?, ?);"
-        db.run(query, [name, bio, nationality, birth_date, death_date, author_image], (error)=>{
+        const query = "INSERT INTO authors(name, bio, nationality, birth_date, death_date) \
+                        values(?, ?, ?, ?, ?);"
+        db.run(query, [name, bio, nationality, birth_date, death_date], (error)=>{
             if(error){
                 console.log("ERROR: ", error);
                 reject(error);
@@ -196,6 +196,32 @@ function addAuthor(name, bio, nationality, birth_date, death_date, author_image)
         });
     });
 }
+function updateAuthor(id, name, bio, nationality, birth_date, death_date=null){
+    return new Promise((resolve, reject)=>{
+        const query = "UPDATE authors SET name = ?, bio = ?, nationality = ?, birth_date = ?, death_date = ? WHERE id = ?";
+        db.run(query, [name, bio, nationality, birth_date, death_date, id], (error)=>{
+            if(error){
+                reject(error);
+            }else {
+                resolve("success updated");
+            }
+        });
+    });
+}
+function deleteAuthor(id){
+    return new Promise((resolve, reject)=>{
+        const query = "DELETE FROM authors WHERE id = ?";
+        db.run(query, [id], (error)=>{
+            if(error){
+                reject(error);
+            }else{
+                resolve("success deleted");
+            }
+        });
+    });
+}
+
+// book_author functions
 function addBook_author(book_id, author_id) {
     return new Promise((resolve, reject)=>{
         const query = "INSERT INTO book_authors(book_id, author_id) values(?, ?)";
@@ -266,11 +292,35 @@ function addGenre(name, description){
         const query = "INSERT INTO genres(name, description) values(?, ?)"
         db.run(query, [name, description], (error)=>{
             if(error){
-                console.log("ERROR: ", error);
+                //console.log("ERROR: ", error);
                 reject(error);
             } else {
-                //console.log("Line add into Genre table");
+                console.log("Line add into Genre table");
                 resolve("success added");
+            }
+        });
+    });
+}
+function updateGenre(id, name, description){
+    return new Promise((resolve, reject)=>{
+        const query = "UPDATE genres SET name = ?, description = ? WHERE id = ?"
+        db.run(query, [name, description, id], (error)=>{
+            if(error){
+                reject(error);
+            }else {
+                resolve("success updated");
+            }
+        });
+    });
+}
+function deleteGenre(id){
+    return new Promise((resolve, reject)=>{
+        const query = "DELETE FROM genres WHERE id = ?";
+        db.run(query, [id], (error)=>{
+            if(error){
+                reject(error);
+            }else{
+                resolve("success deleted");
             }
         });
     });
@@ -301,6 +351,102 @@ function getPublisherById(id){
         })
     })
 }
+function addPublisher(name, address, contact_email, website, established_year){
+    return new Promise((resolve, reject)=>{
+        const query = "INSERT INTO publishers(name, address, contact_email, website, established_year)\
+                            values(?, ?, ?, ?, ?)"
+        db.run(query, [name, address, contact_email, website, established_year], (error)=>{
+            if(error){
+                console.log("ERROR: ", error);
+                reject(error);
+            } else {
+                //console.log("Line add into publisher table");
+                resolve("success added");
+            }
+        });
+    });
+}
+function updatePublisher(id, name, address, contact_email, website, established_year){
+    return new Promise((resolve, reject)=>{
+        const query = "UPDATE publishers SET name = ?, address = ?, contact_email = ?, website = ?, established_year = ? WHERE id = ?";
+        db.run(query, [name, address, contact_email, website, established_year, id], (error)=>{
+            if(error){
+                reject(error);
+            }else {
+                resolve("success updated");
+            }
+        });
+    });
+}
+function deletePublisher(id){
+    return new Promise((resolve, reject)=>{
+        const query = "DELETE FROM publishers WHERE id = ?";
+        db.run(query, [id], (error)=>{
+            if(error){
+                reject(error);
+            }else{
+                resolve("success deleted");
+            }
+        });
+    });
+}
+// totla each talbe
+function totalUsers(){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT COUNT(*) AS count FROM users", (error, total)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve(total.count);
+            }
+        })
+    })
+}
+function totalBooks(){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT COUNT(*) AS count FROM books", (error, total)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve(total.count);
+            }
+        })
+    })
+}
+function totalAuthors(){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT COUNT(*) AS count FROM authors", (error, total)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve(total.count);
+            }
+        })
+    })
+}
+function totalGenres(){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT COUNT(*) AS count FROM genres", (error, total)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve(total.count);
+            }
+        })
+    })
+}
+function totalPublishers(){
+    return new Promise((resolve, reject)=>{
+        db.get("SELECT COUNT(*) AS count FROM publishers", (error, total)=>{
+            if(error){
+                reject(error)
+            }else{
+                resolve(total.count);
+            }
+        })
+    })
+}
+
 
 
 async function createNewBook(bookTitle, ISBN, genreId, totalCopies, availableCopies, publisherId, 
@@ -322,6 +468,9 @@ async function editNewBook(bookId, bookTitle, ISBN, genreId, totalCopies, availa
 }
 
 
-module.exports = {getBooks, getBookById, deleteBook, getAuthors, getGenres, addAuthor, addGenre,
-                    getGenreById, getPublishers, createNewBook, editNewBook, getAuthorById,getPublisherById,
-                    getBooksWithInfoSimple, getBooksWithInfoSimpleById};
+module.exports = {getBooks, getBookById, deleteBook, 
+                  getAuthors, getAuthorById, addAuthor, updateAuthor, deleteAuthor,
+                  getGenres, getGenreById, addGenre, updateGenre, deleteGenre,
+                  getPublishers, getPublisherById, addPublisher, updatePublisher, deletePublisher, 
+                  createNewBook, editNewBook, getBooksWithInfoSimple, getBooksWithInfoSimpleById,
+                  totalUsers, totalBooks, totalAuthors, totalGenres, totalPublishers};

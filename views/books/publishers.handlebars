@@ -1,0 +1,28 @@
+<div class="dashboard">
+    <div class="sub-title">
+        <h1>All publishers</h1>
+        <a href="/createPublisher"><i class="fa fa-user-plus"></i>Add New Publisher</a>
+    </div>
+    <table>
+        <tr>
+            <th>NAME</th>
+            <th>ADDRESS</th>
+            <th>CONTACTC EMAIL</th>
+            <th>WEBSITE</th>
+            <th>ESTABLISHED YEAR</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#each publishers}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{address}}</td>
+                <td>{{contact_email}}</td>
+                <td>{{website}}</td>
+                <td>{{established_year}}</td>
+                <td><a href="/editPublisher/{{this.id}}"><i class="fa fa-edit edit-icon"></i></a></td>
+                <td><a href="/deletePublisher/{{this.id}}"><i class="fa fa-trash delete-icon"></i></a></td>
+            </tr>
+        {{/each}}
+    </table>
+</div>

@@ -1,3 +1,22 @@
-<div>
-    <h1>create publisher</h1>
+<div class="createBook">
+    <h1>Add New Publihser</h1>
+    <form action="/storePublisher" method="post" enctype="multipart/form-data">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Enter name" required><br>
+        <label for="address">Address</label><br>
+        <input type="text" name="address" placeholder="Enter address" required><br>
+        <label for="contactEmail">Contact Email</label><br>
+        <input type="text" name="contactEmail" required><br>
+        <label for="website">Website</label><br>
+        <input type="text" name="website" required><br>
+        <label for="establishedYear">Established Year</label><br>
+        <input type="text" name="establishedYear" required><br>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
 </div>

@@ -8,8 +8,14 @@
     admin username: admin
     admin password: wdf#2025
 
-    
+    librarian username: librarian
+    librarian password: l
 
+    member username: member
+    member password: m
+
+    Some code in this project was generated with the help of ChatGPT.
+    Several images come from the web: Google Images
 */
 const express = require("express");
 const {engine} = require("express-handlebars");

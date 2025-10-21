@@ -1,3 +1,20 @@
-<div>
-    <h1>create author</h1>
+<div class="createBook">
+    <h1>Add New Author</h1>
+    <form action="/storeAuthor" method="post">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Enter name" required><br>
+        <label for="bio">Bio</label><br>
+        <input type="text" name="bio" placeholder="Enter bio" required><br>
+        <label for="nationality">Nationality</label><br>
+        <input type="text" name="nationality" required><br>
+        <label for="birthDate">Birth date</label><br>
+        <input type="text" name="birthDate" required><br>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
 </div>

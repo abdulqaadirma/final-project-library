@@ -1,3 +1,22 @@
-<div>
-    <h1>update publisher</h1>
+<div class="createBook">
+    <h1>Update Publihser</h1>
+    <form action="/updatePublisher/{{publisher.id}}" method="post" enctype="multipart/form-data">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Enter name" value="{{publisher.name}}" required><br>
+        <label for="address">Address</label><br>
+        <input type="text" name="address" placeholder="Enter address" value="{{publisher.address}}" required><br>
+        <label for="contactEmail">Contact Email</label><br>
+        <input type="text" name="contactEmail" value="{{publisher.contact_email}}" required><br>
+        <label for="website">Website</label><br>
+        <input type="text" name="website" value="{{publisher.website}}" required><br>
+        <label for="establishedYear">Established Year</label><br>
+        <input type="text" name="establishedYear" value="{{publisher.established_year}}" required><br>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+    <p class="errorMessenge">
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </p>
 </div>

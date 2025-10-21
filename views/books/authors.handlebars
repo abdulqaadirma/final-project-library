@@ -1,0 +1,28 @@
+<div class="dashboard">
+    <div class="sub-title">
+        <h1>All authors</h1>
+        <a href="/createAuthor"><i class="fa fa-user-plus"></i>Add New Author</a>
+    </div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>BIO</th>
+            <th>NATIONALITY</th>
+            <th>BIRTH DATE</th>
+            <th>DEATH DATEt</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#each authors}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{bio}}</td>
+                <td>{{nationality}}</td>
+                <td>{{birth_date}}</td>
+                <td>{{death_date}}</td>
+                <td><a href="/editAuthor/{{this.id}}"><i class="fa fa-edit edit-icon"></i></a></td>
+                <td><a href="/deleteAuthor/{{this.id}}"><i class="fa fa-trash delete-icon"></i></a></td>
+            </tr>
+        {{/each}}
+    </table>
+</div>

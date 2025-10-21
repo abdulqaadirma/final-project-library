@@ -1,0 +1,52 @@
+<div class="main-dashboard">
+    <h1>Dashboard</h1>
+    <div>
+        {{#if session.isAdmin}}
+            <div class="users">
+                <a href="/adminUserManagement">
+                    <p><i class="fa fa-users"></i></p>
+                    <h2>{{totalUsers}}</h2>
+                    <p>Total users</p>
+                </a>
+            </div>
+        {{else}}
+            {{#if session.isLibrarian}}
+                <div class="users">
+                    <a href="/librarianUserManagement">
+                        <p><i class="fa fa-users"></i></p>
+                        <h2>{{totalUsers}}</h2>
+                        <p>Total users</p>
+                    </a>
+                </div>
+            {{/if}}
+        {{/if}}
+        <div class="books">
+            <a href="/books">
+                <p><i class="fa fa-book"></i></p>
+                <h2>{{totalBooks}}</h2>
+                <p>Total books</p>
+            </a>
+        </div>
+        <div class="authors">
+            <a href="/authors">
+                <p><i class="fa fa-users"></i></p>
+                <h2>{{totalAuthors}}</h2>
+                <p>Total authors</p>
+            </a>
+        </div>
+        <div class="genres">
+            <a href="/genres">
+                <p><i class="fa fa-users"></i></p>
+                <h2>{{totalGenres}}</h2>
+                <p>Total genres</p>
+            </a>
+        </div>
+        <div class="publishers">
+            <a href="/publishers">
+                <p><i class="fa fa-users"></i></p>
+                <h2>{{totalPublishers}}</h2>
+                <p>Total pulishers</p>
+            </a>
+        </div>
+    </div>
+</div>

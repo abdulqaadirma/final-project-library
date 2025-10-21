@@ -9,6 +9,8 @@ userRouter.post("/login", userController.loginAuthoicate);
 userRouter.get("/create", userController.create);
 userRouter.post("/store", userController.store);
 userRouter.get("/logout", userController.logout);
+userRouter.get("/about", userController.about);
+userRouter.get("/contact", userController.contact);
 
 
 module.exports = userRouter;
